@@ -7,7 +7,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: buildpack-deps:jessie
+      - image: stevenmburns/pysat_image:2019feb28
     working_directory: /tmp
   other-executor:
     docker:
