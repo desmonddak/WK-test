@@ -9,6 +9,10 @@ executors:
     docker:
       - image: buildpack-deps:jessie
     working_directory: /tmp
+  other-executor:
+    docker:
+      - image: desmonddak/new-git:latest
+    working_directory: /tmp
 
 jobs:
   flow:
@@ -27,7 +31,7 @@ jobs:
             - echo-output
 
   downstream:
-    executor: my-executor
+    executor: other-executor
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
