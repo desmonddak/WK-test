@@ -7,7 +7,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: stevenmburns/pysat_image:2019feb28
+      - image: desmonddak/python_light:latest
     working_directory: /tmp
   other-executor:
     docker:
