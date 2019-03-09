@@ -7,7 +7,7 @@ version: 2.1
 executors:
   test-loader:
     docker:
-      - image: alpine:latest
+      - image: desmonddak/new-git:latest
     working_directory: /tmp/empty
   my-executor:
     docker:
