@@ -39,7 +39,7 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-        at: /tmp/workspace
+          at: /tmp/workspace
       - run: echo "Hello, world!" > workspace/echo-output
       
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
