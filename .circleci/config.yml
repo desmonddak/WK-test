@@ -55,7 +55,7 @@ jobs:
           # Must be relative path from root
           paths:
             - echo-output
-	    - output
+            - output
 
   downstream:
     executor: other-executor
