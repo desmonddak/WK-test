@@ -22,7 +22,7 @@ jobs:
   load:
     executor: test-loader
     steps:
-      - checkout /work
+      - run: cd / && checkout
       - run: mkdir -p /tmp/workspace
       - run: cp -a tests /tmp/workspace
       
