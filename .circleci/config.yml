@@ -44,6 +44,8 @@ jobs:
       - run: echo "Hello, world!" > workspace/echo-output
       - run: cat workspace/tests/test1 > workspace/output/test1
       - run: cat workspace/tests/test2 > workspace/output/test2
+      - run: ls -l workspace/tests/
+      - run: ls -l workspace/output/
       
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
@@ -53,6 +55,7 @@ jobs:
           # Must be relative path from root
           paths:
             - echo-output
+	    - output
 
   downstream:
     executor: other-executor
