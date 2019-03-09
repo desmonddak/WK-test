@@ -68,12 +68,12 @@ jobs:
           else
             echo "Nope!"; exit 1
           fi
-          if [[ `cat /tmp/workspace/output/test1` == `cat /tmp/workspace/tests/test1 ]]; then
+          if [[ `cat /tmp/workspace/output/test1` == `cat /tmp/workspace/tests/test1` ]]; then
             echo "test1 passed!";
           else
             echo "test1 failed!"; exit 1
           fi
-          if [[ `cat /tmp/workspace/output/test2` == `cat /tmp/workspace/tests/test2 ]]; then
+          if [[ `cat /tmp/workspace/output/test2` == `cat /tmp/workspace/tests/test2` ]]; then
             echo "test2 passed!";
           else
             echo "test2 failed!"; exit 1
