@@ -8,7 +8,7 @@ executors:
   test-loader:
     docker:
       - image: alpine:latest
-    working_directory: /tmp
+    working_directory: /tmp/empty
   my-executor:
     docker:
       - image: desmonddak/python_light:latest
@@ -22,9 +22,9 @@ jobs:
   load:
     executor: test-loader
     steps:
-      - run: cd / && checkout
-      - run: mkdir -p /tmp/workspace
-      - run: cp -a tests /tmp/workspace
+      - checkout
+      - run: mkdir -p workspace
+      - run: cp -a tests workspace/
       
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
