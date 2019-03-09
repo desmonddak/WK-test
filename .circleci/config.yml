@@ -5,6 +5,10 @@
 version: 2.1
 
 executors:
+  test-loader:
+    docker:
+      - image: alpine:latest
+    working_directory: /tmp
   my-executor:
     docker:
       - image: desmonddak/python_light:latest
@@ -15,6 +19,22 @@ executors:
     working_directory: /tmp
 
 jobs:
+  load:
+    executor: test-loader:
+    steps:
+      - checkout
+      - run: mkdir -p workspace
+      - run: cp -a tests workspace
+      
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: workspace
+          # Must be relative path from root
+          paths:
+            - tests
+
   flow:
     executor: my-executor
     steps:
@@ -39,6 +59,7 @@ jobs:
 
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+            ls /tmp/workspace/tests/
             echo "It worked!";
           else
             echo "Nope!"; exit 1
@@ -50,7 +71,8 @@ workflows:
   btd:
     jobs:
       - flow
+          requires:
+            - load
       - downstream:
           requires:
             - flow
-

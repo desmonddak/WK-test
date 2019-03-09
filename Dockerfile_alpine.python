@@ -1,0 +1,19 @@
+FROM alpine:latest
+
+# ARG http_proxy=
+# ARG https_proxy=
+
+RUN apk update && apk add \
+    bash \
+    git \
+    g++ \
+    python3-dev \
+    graphviz-dev \
+    protobuf-dev
+
+RUN \
+    python3 -m venv sympy && \
+        bash -c "source sympy/bin/activate; pip install --upgrade pip"
+
+RUN \
+    bash -c "source sympy/bin/activate; pip install pytest sympy networkx pygraphviz coverage pytest-cov protobuf"
