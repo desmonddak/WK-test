@@ -85,7 +85,7 @@ jobs:
 workflows:
   version: 2.1
 
-  btd:
+  load_run_check:
     jobs:
       - load
       - flow:
