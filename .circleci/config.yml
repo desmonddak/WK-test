@@ -71,7 +71,7 @@ workflows:
 
   btd:
     jobs:
-      - flow
+      - flow:
           requires:
             - load
       - downstream:
