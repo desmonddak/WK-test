@@ -20,7 +20,7 @@ executors:
 
 jobs:
   load:
-    executor: test-loader:
+    executor: test-loader
     steps:
       - checkout
       - run: mkdir -p workspace
@@ -38,7 +38,8 @@ jobs:
   flow:
     executor: my-executor
     steps:
-      - run: mkdir -p workspace
+      - attach_workspace:
+        at: /tmp/workspace
       - run: echo "Hello, world!" > workspace/echo-output
       
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
