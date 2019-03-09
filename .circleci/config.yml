@@ -35,7 +35,7 @@ jobs:
           paths:
             - tests
 
-  flow:
+  run_engine:
     executor: my-executor
     steps:
       - attach_workspace:
@@ -57,7 +57,7 @@ jobs:
             - echo-output
             - output
 
-  downstream:
+  check_results:
     executor: other-executor
     steps:
       - attach_workspace:
@@ -88,9 +88,9 @@ workflows:
   load_run_check:
     jobs:
       - load
-      - flow:
+      - run_engine:
           requires:
             - load
-      - downstream:
+      - check_results:
           requires:
-            - flow
+            - run_engine
