@@ -40,7 +40,10 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace
+      - run: mkdir -p workspace/output/
       - run: echo "Hello, world!" > workspace/echo-output
+      - run: cat workspace/tests/test1 > workspace/output/test1
+      - run: cat workspace/tests/test2 > workspace/output/test2
       
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
       - persist_to_workspace:
@@ -64,6 +67,16 @@ jobs:
             echo "It worked!";
           else
             echo "Nope!"; exit 1
+          fi
+          if [[ `cat /tmp/workspace/output/test1` == `cat /tmp/workspace/tests/test1 ]]; then
+            echo "test1 passed!";
+          else
+            echo "test1 failed!"; exit 1
+          fi
+          if [[ `cat /tmp/workspace/output/test2` == `cat /tmp/workspace/tests/test2 ]]; then
+            echo "test2 passed!";
+          else
+            echo "test2 failed!"; exit 1
           fi
 
 workflows:
